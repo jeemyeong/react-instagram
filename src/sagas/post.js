@@ -15,7 +15,6 @@ function* requestPost(action){
   } catch(e){
     yield put(actions.getPostRejected());
   }
-  // yield fork(watchGuestAddedEvent);
 
 }
 
@@ -30,24 +29,8 @@ function* showWarning(action){
 
 function* watchGetPostRejected(){
   yield takeEvery(types.GET_POST_REJECTED, showWarning);
+  yield takeEvery(types.CREATE_POST_REJECTED, showWarning);
 }
-
-// function* getPostAddedAction(post){
-//   console.log("post in other function");
-//   console.log(post);
-//   yield put(actions.getPostAddedAction(post));
-// }
-//
-// function* watchGuestAddedEvent(){
-//   let post = null;
-//   yield database.ref('/posts').on('child_added', (snap) => {
-//     post = (snap.val());
-//     getPostAddedAction(post)
-//     console.log(post);
-//   })
-//   // yield put(getPostAddedAction(post));
-//   // yield put(actions.getPostAddedAction(post))
-// }
 
 function insertPost(post) {
     const newItemRef = database.ref('posts').push();
@@ -56,14 +39,19 @@ function insertPost(post) {
     });
 }
 
-function* createPost() {
-    const action = yield take(types.CREATE_POST_REQUESTING);
+function* createPost(action) {
     const post = action.post;
     try {
+      yield put(actions.createPostRequested());
       yield call(insertPost, post);
+      yield put(actions.createPostFulfilled(post));
     } catch (e) {
-      yield put(actions.createdPostRejected());
+      yield put(actions.createPostRejected());
     }
+}
+
+function* watchCreatePost(){
+  yield takeEvery(types.CREATE_POST_REQUESTING, createPost);
 }
 
 function createEventChannel() {
@@ -85,8 +73,8 @@ function* updatedItemSaga() {
 }
 
 export default function* postSaga(){
-  yield fork(watchRequestPost);
+  // yield fork(watchRequestPost);
   yield fork(watchGetPostRejected);
-  yield fork(createPost);
+  yield fork(watchCreatePost);
   yield fork(updatedItemSaga);
 }

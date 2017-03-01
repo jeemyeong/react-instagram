@@ -26,6 +26,22 @@ export default function post(state = initialState, action) {
         requested: false,
         warningVisibility: true
       }
+    case types.CREATE_POST_REQUESTED:
+      return {
+        ...state,
+        requested: true
+      };
+    case types.CREATE_POST_FULFILLED:
+      return {
+        ...state,
+        requested: false,
+      };
+    case types.CREATE_POST_REJECTED:
+      return {
+        ...state,
+        requested: false,
+        warningVisibility: true
+      }
     case types.HIDE_WARNING:
       return {
         ...state,
@@ -38,7 +54,7 @@ export default function post(state = initialState, action) {
     case types.GET_POST_ADDED_ACTION:
       return {
         ...state,
-        posts: state.posts.concat(Object.values(action.post))
+        posts: state.posts.concat(action.post)
       }
     case types.UPDATED:
       return {

@@ -7,14 +7,13 @@ class Instagram extends Component {
 
     componentDidMount(){
       this.props.onGetPosts();
-      // this.props.onCreatePost("Hello Item!");
     }
 
     render() {
       return(
           <div>
-            <PostList posts={this.props.postReducer.posts}/>
-            <Warning visible={this.props.postReducer.warningVisibility} message="That post does not exist"/>
+            <PostList posts={this.props.postReducer.posts} onCreatePost={this.props.onCreatePost}/>
+            <Warning visible={this.props.postReducer.warningVisibility} message="Error"/>
           </div>
       );
     }
