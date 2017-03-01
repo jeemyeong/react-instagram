@@ -27,6 +27,20 @@ export const getPostAddedAction = (post) => ({
   post
 });
 
-export const watchGuestAddedEvent = () => {
-  type: types.WATCH_GUEST_ADDED_EVENT
-};
+export const createPost = post => ({
+    type: types.CREATE_POST_REQUESTING,
+    post
+});
+
+export const createPostRequested = () => ({
+  type: types.CREATE_POST_REQUESTED
+});
+
+export const createPostRejected = () => ({
+  type: types.CREATE_POST_REJECTED
+});
+
+export const createPostFulfilled = (posts) => ({
+  type: types.CREATE_POST_FULFILLED,
+  posts
+});

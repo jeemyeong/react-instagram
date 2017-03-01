@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList, Warning } from '../components';
-import { getPosts, getPostAddedAction } from '../actions';
+import { getPosts, getPostAddedAction, createPost } from '../actions';
 
 class Instagram extends Component {
 
     componentDidMount(){
       this.props.onGetPosts();
+      // this.props.onCreatePost("Hello Item!");
     }
 
     render() {
@@ -28,7 +29,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onGetPosts: () => dispatch(getPosts()),
-    onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post))
+    onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
+    onCreatePost: (post) => dispatch(createPost(post))
   };
 }
 

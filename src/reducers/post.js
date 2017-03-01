@@ -36,11 +36,14 @@ export default function post(state = initialState, action) {
         ...state,
       }
     case types.GET_POST_ADDED_ACTION:
-    console.log("GET_POST_ADDED_ACTION");
-    console.log(action.post);
       return {
         ...state,
-        posts: [...post]
+        posts: state.posts.concat(Object.values(action.post))
+      }
+    case types.UPDATED:
+      return {
+        ...state,
+        item: action.payload.item
       }
 		default:
 			return state;
