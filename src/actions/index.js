@@ -22,23 +22,11 @@ export const hideWarning = () => ({
   type: types.HIDE_WARNING
 });
 
-// export const fetchPost = (postId) => ({
-//   type: 'FETCH_POST',
-//   postId,
-// });
-// export const requestPost = () => ({
-//   type: 'REQUEST_POST',
-// });
-// export const receivePost = (post, comments) => ({
-//   type: 'RECEIVE_POST',
-//   post,
-//   comments,
-// });
-//
-// export const receivePostFailed = () => ({
-//   type: 'RECEIVE_POST_FAILED'
-// });
-//
-// export const hideWarning = () => ({
-//   type: 'HIDE_WARNING'
-// });
+export const getPostAddedAction = (post) => ({
+  type: types.GET_POST_ADDED_ACTION,
+  post
+});
+
+export const watchGuestAddedEvent = () => {
+  type: types.WATCH_GUEST_ADDED_EVENT
+};

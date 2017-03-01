@@ -1,43 +1,24 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import Post from './../Post/Post'
 
-const propTypes = {
-
-};
-
-const defaultProps = {
-
-};
-
-class PostList extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-      const posts = this.props.posts;
-        return(
-            <div>
-              <div className="meeting-list">
-                <h2>Posts</h2>
-                {posts && posts !== null ? (
-                  <ul>
-                    {posts.map((post, index) => {
-                      return (
-                        <li key={index}>
-                          {post.contents}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : null}
+const PostList = ({posts}) => {
+    return(
+        <div>
+          <div className="meeting-list">
+            <h2>Posts</h2>
+            {posts && posts !== null ? (
+              <div>
+              {posts.map((post, index) => {
+                return (
+                    <Post contents={post.contents} key={index}>
+                    </Post>
+                );
+              })}
               </div>
-            </div>
-        );
-    }
-}
-
-PostList.propTypes = propTypes;
-PostList.defaultProps = defaultProps;
+            ) : null}
+          </div>
+        </div>
+    );
+};
 
 export default PostList;

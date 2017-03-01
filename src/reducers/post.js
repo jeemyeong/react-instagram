@@ -31,6 +31,17 @@ export default function post(state = initialState, action) {
         ...state,
         warningVisibility: false
       }
+    case types.WATCH_GUEST_ADDED_EVENT:
+      return {
+        ...state,
+      }
+    case types.GET_POST_ADDED_ACTION:
+    console.log("GET_POST_ADDED_ACTION");
+    console.log(action.post);
+      return {
+        ...state,
+        posts: [...post]
+      }
 		default:
 			return state;
 	}

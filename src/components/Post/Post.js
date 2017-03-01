@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Post = () => {
+const Post = ({contents}, {key}) => {
   return (
-    <div>Post</div>
+    <div>{contents}</div>
   );
 };
 
