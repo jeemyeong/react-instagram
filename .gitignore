@@ -41,3 +41,6 @@ firebase.json
 src/database/database.js
 database.rules.json
 .firebaserc
+
+# ignore build dir
+build/
