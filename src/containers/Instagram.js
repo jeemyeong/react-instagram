@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning } from '../components';
+import { PostList, Warning, Login } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions';
 
 class Instagram extends Component {
@@ -12,6 +12,7 @@ class Instagram extends Component {
     render() {
       return(
           <div>
+            <Login/>
             <PostList posts={this.props.postReducer.posts} onCreatePost={this.props.onCreatePost}/>
             <Warning visible={this.props.postReducer.warningVisibility} message="Error"/>
           </div>

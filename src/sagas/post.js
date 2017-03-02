@@ -73,7 +73,7 @@ function* updatedItemSaga() {
 }
 
 export default function* postSaga(){
-  // yield fork(watchRequestPost);
+  yield fork(watchRequestPost);
   yield fork(watchGetPostRejected);
   yield fork(watchCreatePost);
   yield fork(updatedItemSaga);
