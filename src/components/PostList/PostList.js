@@ -10,6 +10,7 @@ class PostList extends React.Component {
         return(
           <div className="Post-list">
             <h2>Posts</h2>
+            {this.props.authed}
             {posts && posts !== null ? (
               <div>
               {posts.map((post, index) => {

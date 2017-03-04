@@ -2,7 +2,7 @@ import { delay, eventChannel } from 'redux-saga';
 import { put, takeEvery, fork, take, call } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as types from '../actions/actionTypes';
-import database from '../database/database';
+import { database } from '../database/database';
 
 function* requestPost(action){
   try{
