@@ -15,13 +15,14 @@ class PostList extends React.Component {
               <div>
               {postsArray.map((post, index) => {
                 return (
-                    <Post contents={post.contents} key={index}>
+                    <Post contents={post.contents} key={index} userInfo={post.userInfo}>
                     </Post>
                 );
               })}
               </div>
             ) : null}
-            <Write onCreatePost={this.props.onCreatePost}/>
+            <Write onCreatePost={this.props.onCreatePost}
+                   userInfo={this.props.userInfo}/>
           </div>
         );
     }

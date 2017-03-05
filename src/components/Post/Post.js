@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Post = ({contents}, {key}) => {
+const Post = (props) => {
+  const userInfo = props.userInfo;
   return (
-    <div>{contents}</div>
+    <div>{props.contents}
+      {userInfo && userInfo !== null ? <b> - {userInfo.name}</b> : null}
+    </div>
   );
 };
 

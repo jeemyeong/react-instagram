@@ -32,18 +32,20 @@ function* watchGetPostRejected(){
   yield takeEvery(types.CREATE_POST_REJECTED, showWarning);
 }
 
-function insertPost(post) {
+function insertPost(post, userInfo) {
     const newItemRef = database.ref('posts').push();
     return newItemRef.set({
-      contents: post
+      contents: post,
+      userInfo: userInfo
     });
 }
 
 function* createPost(action) {
     const post = action.post;
+    const userInfo = action.userInfo;
     try {
       yield put(actions.createPostRequested());
-      yield call(insertPost, post);
+      yield call(insertPost, post, userInfo);
       yield put(actions.createPostFulfilled(post));
     } catch (e) {
       yield put(actions.createPostRejected());

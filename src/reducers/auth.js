@@ -3,7 +3,8 @@ import * as types from '../actions/actionTypes';
 const initialState = {
   authed: false,
   messageVisibility: false,
-  message: ''
+  message: '',
+  userInfo: {}
 
 };
 

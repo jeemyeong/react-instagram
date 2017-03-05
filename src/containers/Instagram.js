@@ -69,6 +69,7 @@ class Instagram extends Component {
                   path='/'
                   component={PostList}
                   authed={this.props.authReducer.authed}
+                  userInfo={this.props.authReducer.userInfo}
                   posts={this.props.postReducer.posts}
                   onCreatePost={this.props.onCreatePost}
                   />
@@ -104,7 +105,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onGetPosts: () => dispatch(getPosts()),
     onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
-    onCreatePost: (post) => dispatch(createPost(post)),
+    onCreatePost: (post, userInfo) => dispatch(createPost(post, userInfo)),
     onAuthLogin: (email, pw) => dispatch(authLoginRequesting(email, pw)),
     onAuthLoginDetected: (user) => dispatch(authLoginDetected(user)),
     onAuthLogoutDetected: () => dispatch(authLogoutDetected()),

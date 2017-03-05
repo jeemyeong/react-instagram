@@ -24,7 +24,7 @@ class Write extends Component {
                 className="btn btn-primary"
                 onClick={
                   () => {
-                      this.props.onCreatePost(this.state.contents)
+                      this.props.onCreatePost(this.state.contents, this.props.userInfo)
                       this.setState({contents: ''})
                     }
                 }

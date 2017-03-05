@@ -27,9 +27,10 @@ export const getPostAddedAction = (post) => ({
   post
 });
 
-export const createPost = post => ({
+export const createPost = (post, userInfo) => ({
     type: types.CREATE_POST_REQUESTING,
-    post
+    post,
+    userInfo
 });
 
 export const createPostRequested = () => ({
