@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import './Register.css'
 
 
-class Register extends React.Component {
+class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()

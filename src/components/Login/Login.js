@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import './Login.css'
 
 
-class Login extends React.Component {
+class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()

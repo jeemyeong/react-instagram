@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Instagram from './containers/Instagram'
-import { Container } from 'semantic-ui-react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
 class App extends Component {
   render() {
     return (
-      <Container>
+      <Router>
         <Instagram/>
-      </Container>
+      </Router>
     );
   }
 }

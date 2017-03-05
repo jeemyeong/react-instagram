@@ -1,5 +1,5 @@
 import { firebaseAuth, database } from '../database/database'
-import { put, takeEvery, fork, take, call } from 'redux-saga/effects';
+import { put, takeEvery, fork } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as actions from '../actions/auth';
 import * as types from '../actions/actionTypes';
@@ -27,7 +27,7 @@ function* watchShowMessage(){
   yield takeEvery(types.AUTH_LOGOUT_FULFILLED, showMessage);
 }
 
-function* saveUser (user) {
+function saveUser (user) {
   return database.ref().child(`users/${user.uid}/info`)
     .set({
       email: user.email,

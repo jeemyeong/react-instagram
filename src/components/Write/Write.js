@@ -1,12 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
-const propTypes = {
-
-};
-
-const defaultProps = {
-
-};
 
 class Write extends Component {
 
@@ -44,7 +37,5 @@ class Write extends Component {
     }
 }
 
-Write.propTypes = propTypes;
-Write.defaultProps = defaultProps;
 
 export default Write;

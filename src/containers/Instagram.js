@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning, Login, Register } from '../components';
+import { PostList, Warning, Login, Register, Post } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions';
 import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
 
-function PrivateRoute ({component: Component, authed, ...rest}) {
+function PrivateRoute ({component: Component, authed, path, ...rest}) {
   return (
     <Route
-      render={(props) => authed === true
-        ? <Component {...props} {...rest} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+      path={path}
+      render={
+        (props) => authed === true
+        ? <Component {...props} {...rest} authed={authed} />
+        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+              }
     />
   )
 }
 
-function PublicRoute ({component: Component, authed, ...rest}) {
+function PublicRoute ({component: Component, authed, path, ...rest}) {
   return (
     <Route
+      path={path}
       render={(props) => authed === false
         ? <Component {...props} {...rest} />
       : <Redirect to='/' />}
@@ -43,7 +48,7 @@ class Instagram extends Component {
     }
     render() {
       return(
-          <BrowserRouter>
+          <Container>
             <div>
               {this.props.authReducer.authed
                 ? <div>
@@ -53,34 +58,37 @@ class Instagram extends Component {
                         onClick={() => {
                           this.props.onAuthLogoutRequesting()
                         }}
-                        className="navbar-brand">로그아웃</button>
+                        className="navbar-brand">[로그아웃]</button>
                   </div>
                 : <span>
-                Login을 해주세요!
+                    <Link to='/login'>Login</Link><br/>
+                    <Link to='/register'>Register</Link><br/>
                   </span>}
-              <PrivateRoute
-                path='/'
-                component={PostList}
-                authed={this.props.authReducer.authed}
-                posts={this.props.postReducer.posts}
-                onCreatePost={this.props.onCreatePost}
-                />
-              <PublicRoute
-                path='/login'
-                authed={this.props.authReducer.authed}
-                component={Login}
-                onAuthLogin={this.props.onAuthLogin}
-                />
-              <PublicRoute
-                path='/register'
-                authed={this.props.authReducer.authed}
-                component={Register}
-                onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
-                />
+
+                <PrivateRoute
+                  path='/'
+                  component={PostList}
+                  authed={this.props.authReducer.authed}
+                  posts={this.props.postReducer.posts}
+                  onCreatePost={this.props.onCreatePost}
+                  />
+                <PublicRoute
+                  path='/login'
+                  authed={this.props.authReducer.authed}
+                  component={Login}
+                  onAuthLogin={this.props.onAuthLogin}
+                  />
+                <PublicRoute
+                  path='/register'
+                  authed={this.props.authReducer.authed}
+                  component={Register}
+                  onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
+                  />
               <Warning visible={this.props.postReducer.warningVisibility} message="Error"/>
               <Warning visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
             </div>
-          </BrowserRouter>
+          </Container>
+
       );
     }
 }
