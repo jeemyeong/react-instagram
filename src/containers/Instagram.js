@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList, Warning, Login, Register, Post } from '../components';
-import { getPosts, getPostAddedAction, createPost } from '../actions';
+import { getPosts, getPostAddedAction, createPost } from '../actions/post';
 import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, Link, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'

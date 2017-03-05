@@ -1,6 +1,6 @@
 import { delay, eventChannel } from 'redux-saga';
 import { put, takeEvery, fork, take, call } from 'redux-saga/effects';
-import * as actions from '../actions';
+import * as actions from '../actions/post';
 import * as types from '../actions/actionTypes';
 import { database } from '../database/database';
 
