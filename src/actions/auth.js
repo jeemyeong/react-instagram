@@ -6,39 +6,65 @@ export const authLoginRequesting = (email, pw) => ({
   pw
 });
 
-export const authLoginFulfilled = (user) => ({
+export const authLoginRequested = () => ({
+  type: types.AUTH_LOGIN_REQUESTED,
+});
+
+export const authLoginFulfilled = (message) => ({
   type: types.AUTH_LOGIN_FULFILLED,
-  user
+  message
 });
 
 export const authLoginRejected = () => ({
   type: types.AUTH_LOGIN_REJECTED,
 });
 
+export const authLoginDetected = (user) => ({
+  type: types.AUTH_LOGIN_DETECTED,
+  user
+});
+
 export const authLogoutRequesting = () => ({
   type: types.AUTH_LOGOUT_REQUESTING,
 });
 
-export const authLogoutFulfilled = () => ({
-  type: types.AUTH_LOGOUT_FULFILLED
+export const authLogoutRequested = () => ({
+  type: types.AUTH_LOGOUT_REQUESTED,
+});
+
+export const authLogoutFulfilled = (message) => ({
+  type: types.AUTH_LOGOUT_FULFILLED,
+  message
 });
 
 export const authLogoutRejected = () => ({
   type: types.AUTH_LOGOUT_REJECTED,
 });
 
-export const authRegisterRequesting = () => ({
-  type: types.AUTH_REGISTER_REQUESTING
+export const hideAuthMessage = () => ({
+  type: types.HIDE_AUTH_MESSAGE
+});
+
+export const authLogoutDetected = () => ({
+  type: types.AUTH_LOGOUT_DETECTED,
+});
+
+export const authRegisterRequesting = (email, pw) => ({
+  type: types.AUTH_REGISTER_REQUESTING,
+  email,
+  pw
 });
 
 export const authRegisterRequested = () => ({
   type: types.AUTH_REGISTER_REQUESTED
 });
 
-export const authRegisterRejected = () => ({
-  type: types.AUTH_REGISTER_REJECTED
+export const authRegisterRejected = (message) => ({
+  type: types.AUTH_REGISTER_REJECTED,
+  message
 });
 
-export const authRegisterFulfilled = () => ({
-  type: types.AUTH_REGISTER_FULFILLED
+export const authRegisterFulfilled = (message) => ({
+  type: types.AUTH_REGISTER_FULFILLED,
+  message
 });

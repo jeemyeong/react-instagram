@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning, Login } from '../components';
+import { PostList, Warning, Login, Register } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions';
-import { authLoginRequesting, authLoginFulfilled, authLogoutFulfilled, authLogoutRequesting } from '../actions/auth';
+import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import { firebaseAuth } from '../database/database'
 
@@ -32,9 +32,9 @@ class Instagram extends Component {
       this.props.onGetPosts();
       this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
         if (user) {
-          this.props.onAuthLoginFulfilled(user)
+          this.props.onAuthLoginDetected(user)
         } else {
-          this.props.onAuthLogoutFulfilled()
+          this.props.onAuthLogoutDetected()
         }
       })
     }
@@ -46,14 +46,17 @@ class Instagram extends Component {
           <BrowserRouter>
             <div>
               {this.props.authReducer.authed
-                ? <button
-                    style={{border: 'none', background: 'transparent'}}
-                    onClick={() => {
-                      this.props.onAuthLogoutRequesting()
-                    }}
-                    className="navbar-brand">Logout</button>
+                ? <div>
+                    {this.props.authReducer.user.email}님 환영합니다.
+                    <button
+                        style={{border: 'none', background: 'transparent'}}
+                        onClick={() => {
+                          this.props.onAuthLogoutRequesting()
+                        }}
+                        className="navbar-brand">로그아웃</button>
+                  </div>
                 : <span>
-                Login
+                Login을 해주세요!
                   </span>}
               <PrivateRoute
                 path='/'
@@ -68,7 +71,14 @@ class Instagram extends Component {
                 component={Login}
                 onAuthLogin={this.props.onAuthLogin}
                 />
+              <PublicRoute
+                path='/register'
+                authed={this.props.authReducer.authed}
+                component={Register}
+                onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
+                />
               <Warning visible={this.props.postReducer.warningVisibility} message="Error"/>
+              <Warning visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
             </div>
           </BrowserRouter>
       );
@@ -88,9 +98,10 @@ function mapDispatchToProps(dispatch) {
     onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
     onCreatePost: (post) => dispatch(createPost(post)),
     onAuthLogin: (email, pw) => dispatch(authLoginRequesting(email, pw)),
-    onAuthLoginFulfilled: (user) => dispatch(authLoginFulfilled(user)),
-    onAuthLogoutFulfilled: () => dispatch(authLogoutFulfilled()),
-    onAuthLogoutRequesting: () => dispatch(authLogoutRequesting())
+    onAuthLoginDetected: (user) => dispatch(authLoginDetected(user)),
+    onAuthLogoutDetected: () => dispatch(authLogoutDetected()),
+    onAuthLogoutRequesting: () => dispatch(authLogoutRequesting()),
+    onAuthRegisterRequesting: (email, pw) => dispatch(authRegisterRequesting(email, pw))
   };
 }
 

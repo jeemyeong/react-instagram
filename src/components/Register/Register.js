@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import './Login.css'
+import './Register.css'
 
 
-class Login extends React.Component {
+class Register extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.onAuthLogin(this.email.value, this.pw.value)
+    this.props.onAuthRegisterRequesting(this.email.value, this.pw.value)
   }
 
     render() {
         return(
           <div className="col-sm-6 col-sm-offset-3">
-            <h1> Login </h1>
+            <h1> Register </h1>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label>Email</label>
@@ -22,7 +22,7 @@ class Login extends React.Component {
                 <label>Password</label>
                 <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
               </div>
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-primary">Register</button>
             </form>
           </div>
         );
@@ -30,4 +30,4 @@ class Login extends React.Component {
 }
 
 
-export default Login;
+export default Register;

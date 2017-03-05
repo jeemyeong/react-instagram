@@ -1,23 +1,61 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  authed: false
+  authed: false,
+  messageVisibility: false,
+  message: ''
+
 };
 
 export default function auth(state = initialState, action) {
 
 	switch(action.type) {
-    case types.AUTH_LOGIN_FULFILLED:
+    case types.AUTH_LOGIN_DETECTED:
       return {
         ...state,
         authed: true,
         user: action.user
       }
-    case types.AUTH_LOGOUT_FULFILLED:
+    case types.AUTH_LOGOUT_DETECTED:
       return {
         ...state,
         authed: false
       }
+    case types.AUTH_REGISTER_REJECTED:
+      return {
+        ...state,
+        requested: false,
+        messageVisibility: true,
+        message: action.message
+      }
+    case types.AUTH_REGISTER_FULFILLED:
+      return {
+        ...state,
+        requested: false,
+        messageVisibility: true,
+        message: action.message
+      }
+    case types.AUTH_LOGIN_FULFILLED:
+      return {
+        ...state,
+        requested: false,
+        messageVisibility: true,
+        message: action.message
+      }
+    case types.AUTH_LOGOUT_FULFILLED:
+      return {
+        ...state,
+        requested: false,
+        messageVisibility: true,
+        message: action.message
+      }
+
+    case types.HIDE_AUTH_MESSAGE:
+      return {
+        ...state,
+        messageVisibility: false
+      }
+
 		default:
 			return state;
 	}
