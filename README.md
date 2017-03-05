@@ -14,9 +14,10 @@ const config = {
 };
 
 firebase.initializeApp(config);
-const database = firebase.database();
 
-export default database;
+export const database = firebase.database();
+export const firebaseAuth = firebase.auth
+
 ```
 의 형태로 코드 생성 하면 실행됩니다.
 
