@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   requested: false,
-  posts: [],
+  posts: {},
   warningVisibility: false
 };
 
@@ -18,7 +18,7 @@ export default function post(state = initialState, action) {
       return {
         ...state,
         requested: false,
-        posts: [...Object.keys(action.posts).map(k => action.posts[k])]
+        posts: action.posts
       };
     case types.GET_POST_REJECTED:
       return {
@@ -54,7 +54,7 @@ export default function post(state = initialState, action) {
     case types.GET_POST_ADDED_ACTION:
       return {
         ...state,
-        posts: state.posts.concat(action.post)
+        posts: Object.assign(state.posts, action.post)
       }
     case types.UPDATED:
       return {

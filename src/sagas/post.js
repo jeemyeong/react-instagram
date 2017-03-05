@@ -58,7 +58,10 @@ function createEventChannel() {
     const listener = eventChannel(
         emit => {
             database.ref('posts')
-            .on('child_added', data => emit(data.val()))
+            .on('child_added', data => {
+              let post = {}
+              post[data.key] = data.val()
+              emit(post)})
             return () => database.ref('posts').off(listener);
         }
     );

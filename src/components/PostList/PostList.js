@@ -6,14 +6,14 @@ import "./PostList.css";
 class PostList extends React.Component {
 
     render() {
-      const posts = this.props.posts;
+      const postsArray = Object.keys(this.props.posts).map(k => this.props.posts[k])
         return(
           <div className="Post-list">
             <h2>Posts</h2>
             {this.props.authed}
-            {posts && posts !== null ? (
+            {postsArray && postsArray !== null ? (
               <div>
-              {posts.map((post, index) => {
+              {postsArray.map((post, index) => {
                 return (
                     <Post contents={post.contents} key={index}>
                     </Post>
