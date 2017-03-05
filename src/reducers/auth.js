@@ -13,13 +13,19 @@ export default function auth(state = initialState, action) {
     case types.AUTH_LOGIN_DETECTED:
       return {
         ...state,
+      }
+    case types.AUTH_LOGIN_GET_USER_INFO:
+      return {
+        ...state,
         authed: true,
-        user: action.user
+        userInfo: action.userInfo,
+        messageVisibility: true,
+        message: action.message
       }
     case types.AUTH_LOGOUT_DETECTED:
       return {
         ...state,
-        authed: false
+        authed: false,
       }
     case types.AUTH_REGISTER_REJECTED:
       return {
@@ -32,15 +38,11 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         requested: false,
-        messageVisibility: true,
-        message: action.message
       }
     case types.AUTH_LOGIN_FULFILLED:
       return {
         ...state,
         requested: false,
-        messageVisibility: true,
-        message: action.message
       }
     case types.AUTH_LOGOUT_FULFILLED:
       return {

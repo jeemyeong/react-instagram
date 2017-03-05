@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning, Login, Register, Post } from '../components';
+import { PostList, Warning, Login, Register } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
 import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, Link, Redirect } from 'react-router-dom'
@@ -52,7 +52,7 @@ class Instagram extends Component {
             <div>
               {this.props.authReducer.authed
                 ? <div>
-                    {this.props.authReducer.user.email}님 환영합니다.
+                    {this.props.authReducer.userInfo.name}님 환영합니다.
                     <button
                         style={{border: 'none', background: 'transparent'}}
                         onClick={() => {
@@ -109,7 +109,7 @@ function mapDispatchToProps(dispatch) {
     onAuthLoginDetected: (user) => dispatch(authLoginDetected(user)),
     onAuthLogoutDetected: () => dispatch(authLogoutDetected()),
     onAuthLogoutRequesting: () => dispatch(authLogoutRequesting()),
-    onAuthRegisterRequesting: (email, pw) => dispatch(authRegisterRequesting(email, pw))
+    onAuthRegisterRequesting: (email, pw, name) => dispatch(authRegisterRequesting(email, pw, name))
   };
 }
 

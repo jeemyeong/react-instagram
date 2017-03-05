@@ -6,7 +6,7 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.onAuthRegisterRequesting(this.email.value, this.pw.value)
+    this.props.onAuthRegisterRequesting(this.email.value, this.pw.value, this.name.value)
   }
 
     render() {
@@ -21,6 +21,10 @@ class Register extends Component {
               <div className="form-group">
                 <label>Password</label>
                 <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
+              </div>
+              <div className="form-group">
+                <label>Name</label>
+                <input type="name" className="form-control" placeholder="Name" ref={(name) => this.name = name} />
               </div>
               <button type="submit" className="btn btn-primary">Register</button>
             </form>

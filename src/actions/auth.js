@@ -10,9 +10,8 @@ export const authLoginRequested = () => ({
   type: types.AUTH_LOGIN_REQUESTED,
 });
 
-export const authLoginFulfilled = (message) => ({
+export const authLoginFulfilled = () => ({
   type: types.AUTH_LOGIN_FULFILLED,
-  message
 });
 
 export const authLoginRejected = () => ({
@@ -22,6 +21,12 @@ export const authLoginRejected = () => ({
 export const authLoginDetected = (user) => ({
   type: types.AUTH_LOGIN_DETECTED,
   user
+});
+
+export const authLoginGetUserInfo = (userInfo, message) => ({
+  type: types.AUTH_LOGIN_GET_USER_INFO,
+  userInfo,
+  message
 });
 
 export const authLogoutRequesting = () => ({
@@ -46,13 +51,14 @@ export const hideAuthMessage = () => ({
 });
 
 export const authLogoutDetected = () => ({
-  type: types.AUTH_LOGOUT_DETECTED,
+  type: types.AUTH_LOGOUT_DETECTED
 });
 
-export const authRegisterRequesting = (email, pw) => ({
+export const authRegisterRequesting = (email, pw, name) => ({
   type: types.AUTH_REGISTER_REQUESTING,
   email,
-  pw
+  pw,
+  name
 });
 
 export const authRegisterRequested = () => ({
@@ -64,7 +70,6 @@ export const authRegisterRejected = (message) => ({
   message
 });
 
-export const authRegisterFulfilled = (message) => ({
+export const authRegisterFulfilled = () => ({
   type: types.AUTH_REGISTER_FULFILLED,
-  message
 });
