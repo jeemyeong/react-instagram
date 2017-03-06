@@ -8,7 +8,7 @@ import reducers from './reducers';
 import rootSaga from './sagas';
 import App from './App';
 import './index.css';
-import './Animation.scss';
+import './Animation.css';
 
 const logger = createLogger();
 

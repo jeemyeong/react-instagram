@@ -142,6 +142,8 @@
   animation-name: bounceOut
 }
 
+/*the animation definition*/
+
 @-webkit-keyframes bounceInLeft {
   0%, 100%, 60%, 75%, 90% {
     -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
