@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning, Login, Register } from '../components';
+import { PostList, Warning, Login, Register, Loading } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
 import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, Link, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
 
-function PrivateRoute ({component: Component, authed, path, ...rest}) {
+function PrivateRoute ({component: Component, authed, loading, path, ...rest}) {
   return (
     <Route
       path={path}
       render={
-        (props) => authed === true
-        ? <Component {...props} {...rest} authed={authed} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
-              }
+          function(props){
+            if (loading===true){
+              return <Loading/>
+            }else if (authed===true){
+              return <Component {...props} {...rest} authed={authed} />
+            }else{
+              return <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+            }
+          }
+        }
     />
   )
 }
@@ -72,6 +78,7 @@ class Instagram extends Component {
                   userInfo={this.props.authReducer.userInfo}
                   posts={this.props.postReducer.posts}
                   onCreatePost={this.props.onCreatePost}
+                  loading={this.props.authReducer.authedLoading}
                   />
                 <PublicRoute
                   path='/login'

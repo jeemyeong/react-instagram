@@ -2,6 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   authed: false,
+  authedLoading: true,
   messageVisibility: false,
   message: '',
   userInfo: {}
@@ -19,6 +20,7 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         authed: true,
+        authedLoading: false,
         userInfo: action.userInfo,
         messageVisibility: true,
         message: action.message
@@ -27,6 +29,7 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         authed: false,
+        authedLoading: false
       }
     case types.AUTH_REGISTER_REJECTED:
       return {

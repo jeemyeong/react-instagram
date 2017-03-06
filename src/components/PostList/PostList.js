@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Post from './../Post/Post'
 import Write from './../Write/Write'
 import "./PostList.css";
 
-class PostList extends React.Component {
+class PostList extends Component {
 
     render() {
       const postsArray = Object.keys(this.props.posts).map(k => this.props.posts[k])
