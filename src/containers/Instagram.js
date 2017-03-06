@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Warning, Login, Register, Loading } from '../components';
+import { PostList, Message, Login, Register, Loading } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
 import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, Link, Redirect } from 'react-router-dom'
@@ -92,8 +92,8 @@ class Instagram extends Component {
                   component={Register}
                   onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
                   />
-              <Warning visible={this.props.postReducer.warningVisibility} message="Error"/>
-              <Warning visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
+                <Message visible={this.props.postReducer.warningVisibility} message="Error"/>
+                <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
             </div>
           </Container>
 

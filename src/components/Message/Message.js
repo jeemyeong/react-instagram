@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import "./Warning.css";
+import "./Message.css";
 
-class Warning extends Component {
+class Message extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -31,8 +31,8 @@ class Warning extends Component {
 
     if(!visible && !closing) return null;
     return (
-      <div className="Warning-wrapper">
-        <div className={`Warning ${closing?'bounceOut':'bounceIn'} animated bounceIn`}>
+      <div className="Message-wrapper">
+        <div className={`Message ${closing?'bounceOut':'bounceIn'} animated bounceIn`}>
           {message}
         </div>
       </div>
@@ -40,4 +40,4 @@ class Warning extends Component {
   }
 }
 
-export default Warning;
+export default Message;

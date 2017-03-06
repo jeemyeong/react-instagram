@@ -1,4 +1,4 @@
-.Warning-wrapper {
+.Message-wrapper {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -6,7 +6,7 @@
   z-index: 10;
 }
 
-.Warning {
+.Message {
   white-space: nowrap;
   font-size: 1.5rem;
   padding: 2rem;
