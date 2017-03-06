@@ -1,10 +1,12 @@
 import Spinner from 'react-spinkit';
-
 import React from 'react';
+import "./Loading.css";
 
 const Loading = () => {
   return (
-    <Spinner spinnerName='double-bounce' />
+    <div className="Loading-wrapper">
+        <Spinner spinnerName="folding-cube" noFadeIn />
+    </div>
   );
 };
 
