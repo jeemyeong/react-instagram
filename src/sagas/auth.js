@@ -118,7 +118,6 @@ function* watchLogin(){
 
 
 export default function* auth(){
-  yield firebaseAuth().signOut()
   yield fork(watchRegister);
   yield fork(watchLogout);
   yield fork(watchLogin);
