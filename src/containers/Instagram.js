@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList, Message, Login, Register, Loading } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
-import { authLoginRequesting, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
+import { authLoginRequestingWithEmail, authLoginRequestingWithFacebook, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
 import { Route, Link, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
@@ -53,12 +53,13 @@ class Instagram extends Component {
       this.removeListener()
     }
     render() {
+      const userInfo = this.props.authReducer.userInfo;
       return(
           <Container>
             <div>
               {this.props.authReducer.authed
                 ? <div>
-                    {this.props.authReducer.userInfo.name}님 환영합니다.
+                    {userInfo.name!==undefined?userInfo.name:userInfo.email}님 환영합니다.
                     <button
                         style={{border: 'none', background: 'transparent'}}
                         onClick={() => {
@@ -84,7 +85,8 @@ class Instagram extends Component {
                   path='/login'
                   authed={this.props.authReducer.authed}
                   component={Login}
-                  onAuthLogin={this.props.onAuthLogin}
+                  onAuthLoginWithEmail={this.props.onAuthLoginWithEmail}
+                  onAuthLoginWithFacebook={this.props.onAuthLoginWithFacebook}
                   />
                 <PublicRoute
                   path='/register'
@@ -113,7 +115,8 @@ function mapDispatchToProps(dispatch) {
     onGetPosts: () => dispatch(getPosts()),
     onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
     onCreatePost: (post, userInfo) => dispatch(createPost(post, userInfo)),
-    onAuthLogin: (email, pw) => dispatch(authLoginRequesting(email, pw)),
+    onAuthLoginWithEmail: (email, pw) => dispatch(authLoginRequestingWithEmail(email, pw)),
+    onAuthLoginWithFacebook: () => dispatch(authLoginRequestingWithFacebook()),
     onAuthLoginDetected: (user) => dispatch(authLoginDetected(user)),
     onAuthLogoutDetected: () => dispatch(authLogoutDetected()),
     onAuthLogoutRequesting: () => dispatch(authLogoutRequesting()),

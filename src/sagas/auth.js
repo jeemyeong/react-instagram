@@ -8,7 +8,7 @@ function* register(action){
   try{
     yield put(actions.authRegisterRequested());
     const user = yield firebaseAuth().createUserWithEmailAndPassword(action.email, action.pw)
-    yield saveUser(user, action.name)
+    yield saveUserWithEmail(user, action.name)
     yield put(actions.authRegisterFulfilled());
   } catch(e){
     yield put(actions.authRegisterRejected(e.message));
@@ -23,9 +23,10 @@ function* showMessage(){
 function* watchShowMessage(){
   yield takeEvery(types.AUTH_REGISTER_REJECTED, showMessage);
   yield takeEvery(types.AUTH_LOGIN_GET_USER_INFO, showMessage);
+  yield takeEvery(types.AUTH_LOGIN_REJECTED, showMessage);
 }
 
-function saveUser (user, name) {
+function saveUserWithEmail (user, name) {
   return database.ref().child(`users/${user.uid}/info`)
     .set({
       email: user.email,
@@ -35,17 +36,40 @@ function saveUser (user, name) {
     .then(() => user)
 }
 
+function saveUserWithFacebook (user) {
+  console.log(user.displayName);
+  return database.ref().child(`users/${user.uid}/info`)
+    .set({
+      email: user.email,
+      uid: user.uid,
+      name: user.displayName!==undefined?user.displayName:null
+    })
+    .then(() => user)
+}
+
 function* watchRegister(){
   yield takeEvery(types.AUTH_REGISTER_REQUESTING, register);
 }
 
 function* getUserInfo(action){
-  let userInfo = null;
-  yield database.ref(`users/${action.user.uid}/info`)
+  try{
+    const user = action.user
+    let userInfo = null;
+    yield database.ref(`users/${user.uid}/info`)
     .once('value', snap => {
       userInfo = snap.val();
     })
-  yield put(actions.authLoginGetUserInfo(userInfo, `Hello, ${userInfo.name}`));
+    if(userInfo===null){
+      yield saveUserWithFacebook(user)
+      yield database.ref(`users/${user.uid}/info`)
+      .once('value', snap => {
+        userInfo = snap.val();
+      })
+    }
+    yield put(actions.authLoginGetUserInfo(userInfo, `Hello ${userInfo.name!==undefined?userInfo.name:userInfo.email}`));
+  } catch(e){
+    console.log(e);
+  }
 }
 
 function* watchLoginDetected(){
@@ -66,22 +90,35 @@ function* watchLogout(){
   yield takeEvery(types.AUTH_LOGOUT_REQUESTING, logout);
 }
 
-function* login (action) {
+function* loginWithEmail (action) {
   try{
     yield put(actions.authLoginRequested());
     yield firebaseAuth().signInWithEmailAndPassword(action.email, action.pw)
     yield put(actions.authLoginFulfilled());
   } catch(e){
-    yield put(actions.authLoginRejected());
+    yield put(actions.authLoginRejected(e.message));
+  }
+}
+
+function* loginWithFacebook (action) {
+  try{
+    yield put(actions.authLoginRequested());
+    const provider = new firebaseAuth.FacebookAuthProvider()
+    yield firebaseAuth().signInWithPopup(provider)
+    yield put(actions.authLoginFulfilled());
+  } catch(e){
+    yield put(actions.authLoginRejected(e.message));
   }
 }
 
 function* watchLogin(){
-  yield takeEvery(types.AUTH_LOGIN_REQUESTING, login);
+  yield takeEvery(types.AUTH_LOGIN_REQUESTING_WITH_EMAIL, loginWithEmail);
+  yield takeEvery(types.AUTH_LOGIN_REQUESTING_WITH_FACEBOOK, loginWithFacebook);
 }
 
 
 export default function* auth(){
+  yield firebaseAuth().signOut()
   yield fork(watchRegister);
   yield fork(watchLogout);
   yield fork(watchLogin);

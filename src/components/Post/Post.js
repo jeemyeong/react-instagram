@@ -4,7 +4,7 @@ const Post = (props) => {
   const userInfo = props.userInfo;
   return (
     <div>{props.contents}
-      {userInfo && userInfo !== null ? <b> - {userInfo.name}</b> : null}
+      {userInfo && userInfo !== null ? <b> - {userInfo.name!==undefined?userInfo.name:userInfo.email}</b> : null}
     </div>
   );
 };

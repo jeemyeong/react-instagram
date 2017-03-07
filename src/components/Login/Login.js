@@ -6,7 +6,7 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.onAuthLogin(this.email.value, this.pw.value)
+    this.props.onAuthLoginWithEmail(this.email.value, this.pw.value)
   }
 
     render() {
@@ -24,6 +24,7 @@ class Login extends Component {
               </div>
               <button type="submit" className="btn btn-primary">Login</button>
             </form>
+            <button onClick={this.props.onAuthLoginWithFacebook}>Facebook Login</button>
           </div>
         );
     }

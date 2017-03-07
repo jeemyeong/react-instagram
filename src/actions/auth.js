@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
-export const authLoginRequesting = (email, pw) => ({
-  type: types.AUTH_LOGIN_REQUESTING,
+export const authLoginRequestingWithEmail = (email, pw) => ({
+  type: types.AUTH_LOGIN_REQUESTING_WITH_EMAIL,
   email,
   pw
 });
@@ -14,8 +14,9 @@ export const authLoginFulfilled = () => ({
   type: types.AUTH_LOGIN_FULFILLED,
 });
 
-export const authLoginRejected = () => ({
+export const authLoginRejected = (message) => ({
   type: types.AUTH_LOGIN_REJECTED,
+  message
 });
 
 export const authLoginDetected = (user) => ({
@@ -54,11 +55,15 @@ export const authLogoutDetected = () => ({
   type: types.AUTH_LOGOUT_DETECTED
 });
 
-export const authRegisterRequesting = (email, pw, name) => ({
-  type: types.AUTH_REGISTER_REQUESTING,
+export const authRegisterRequestingWithEmail = (email, pw, name) => ({
+  type: types.AUTH_LOGIN_REQUESTING_WITH_EMAIL,
   email,
   pw,
   name
+});
+
+export const authLoginRequestingWithFacebook = () => ({
+  type: types.AUTH_LOGIN_REQUESTING_WITH_FACEBOOK
 });
 
 export const authRegisterRequested = () => ({
