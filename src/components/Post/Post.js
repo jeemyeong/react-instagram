@@ -1,11 +1,13 @@
 import React from 'react';
+import { Card, Icon } from 'semantic-ui-react'
 
 const Post = (props) => {
   const userInfo = props.userInfo;
   return (
-    <div>{props.contents}
-      {userInfo && userInfo !== null ? <b> - {userInfo.name!==undefined?userInfo.name:userInfo.email}</b> : null}
-    </div>
+    <Card>
+      <Card.Content header={userInfo.name!==undefined?userInfo.name:userInfo.email} />
+      <Card.Content description={props.contents} />
+    </Card>
   );
 };
 

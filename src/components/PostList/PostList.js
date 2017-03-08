@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Post from './../Post/Post'
 import Write from './../Write/Write'
 import "./PostList.css";
+import { Card } from 'semantic-ui-react'
 
 class PostList extends Component {
 
@@ -12,14 +13,14 @@ class PostList extends Component {
             <h2>Posts</h2>
             {this.props.authed}
             {postsArray && postsArray !== null ? (
-              <div>
-              {postsArray.map((post, index) => {
-                return (
-                    <Post contents={post.contents} key={index} userInfo={post.userInfo}>
-                    </Post>
-                );
-              })}
-              </div>
+              <Card.Group>
+                {postsArray.map((post, index) => {
+                  return (
+                      <Post contents={post.contents} key={index} userInfo={post.userInfo}>
+                      </Post>
+                  );
+                })}
+              </Card.Group>
             ) : null}
             <Write onCreatePost={this.props.onCreatePost}
                    userInfo={this.props.userInfo}/>
