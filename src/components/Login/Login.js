@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './Login.css'
-import { Button, Form, Label, Icon, Header } from 'semantic-ui-react'
+import { Button, Form, Label, Icon, Header, Divider } from 'semantic-ui-react'
 
 
 class Login extends Component {
@@ -10,7 +10,6 @@ class Login extends Component {
       this.state = {
         email: '',
         password: '',
-        closing: false
       };
 
   }
@@ -21,20 +20,18 @@ class Login extends Component {
     this.setState({
       email: '',
       password: '',
-      closing: true
     })
   }
 
     render() {
-        const { closing } = this.state;
+        const { closing } = this.props;
         return(
           <div className={`animated ${closing?'fadeOut':'fadeIn'} fadeIn Login`} >
             <Form onSubmit={this.handleSubmit}>
-
-                <Header as='h2' icon>
-                  <Icon name='sign in' />
-                  Sign In
-                </Header>
+              <Header as='h2' icon>
+                <Icon name='sign in' />
+                Sign In
+              </Header>
               <Form.Field>
                 <Label pointing="below">Email</Label>
                 <input
@@ -53,9 +50,10 @@ class Login extends Component {
                 />
               </Form.Field>
               <Button type='submit'>Login</Button>
-              <Button onClick={this.props.onAuthLoginWithFacebook}>Facebook Login</Button>
-              <Link to='/register'><Button>Register</Button></Link>
             </Form>
+            <Divider/>
+            <Button onClick={this.props.onAuthLoginWithFacebook}>Facebook Login</Button>
+            <Link to='/register'><Button>Register</Button></Link>
           </div>
         );
     }

@@ -72,12 +72,15 @@ class Instagram extends Component {
                   component={Login}
                   onAuthLoginWithEmail={this.props.onAuthLoginWithEmail}
                   onAuthLoginWithFacebook={this.props.onAuthLoginWithFacebook}
+                  closing={this.props.authReducer.authedLoading}
                   />
                 <PublicRoute
                   path='/register'
                   authed={this.props.authReducer.authed}
                   component={Register}
                   onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
+                  onAuthLoginWithFacebook={this.props.onAuthLoginWithFacebook}
+                  closing={this.props.authReducer.authedLoading}
                   />
                 <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
                 <Loading visible={this.props.authReducer.authedLoading}/>

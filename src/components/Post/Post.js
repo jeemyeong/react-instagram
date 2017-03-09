@@ -4,7 +4,7 @@ import { Card } from 'semantic-ui-react'
 const Post = (props) => {
   const userInfo = props.userInfo;
   return (
-    <Card>
+    <Card className={`animated fadeIn`}>
       <Card.Content
         header={userInfo.name!==undefined?userInfo.name:userInfo.email}
         description={props.contents}

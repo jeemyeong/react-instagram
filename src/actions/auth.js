@@ -55,8 +55,8 @@ export const authLogoutDetected = () => ({
   type: types.AUTH_LOGOUT_DETECTED
 });
 
-export const authRegisterRequestingWithEmail = (email, pw, name) => ({
-  type: types.AUTH_LOGIN_REQUESTING_WITH_EMAIL,
+export const authRegisterRequesting = (email, pw, name) => ({
+  type: types.AUTH_REGISTER_REQUESTING,
   email,
   pw,
   name

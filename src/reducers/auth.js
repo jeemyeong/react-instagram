@@ -22,6 +22,11 @@ export default function auth(state = initialState, action) {
         ...state,
         authedLoading: true,
       }
+    case types.AUTH_REGISTER_REQUESTED:
+      return {
+        ...state,
+        authedLoading: true,
+      }
     case types.AUTH_LOGIN_GET_USER_INFO:
       return {
         ...state,
@@ -42,14 +47,16 @@ export default function auth(state = initialState, action) {
         ...state,
         requested: false,
         messageVisibility: true,
-        message: action.message
+        message: action.message,
+        authedLoading: false
       }
     case types.AUTH_LOGIN_REJECTED:
       return {
         ...state,
         requested: false,
         messageVisibility: true,
-        message: action.message
+        message: action.message,
+        authedLoading: false
       }
     case types.AUTH_REGISTER_FULFILLED:
       return {
