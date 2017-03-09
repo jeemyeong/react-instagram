@@ -7,14 +7,14 @@ import { Route, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
 
-function PrivateRoute ({component: Component, authed, loading, path, ...rest}) {
+function PrivateRoute ({component: Component, authed, authedLoading, path, ...rest}) {
   return (
     <Route
       path={path}
       render={
           function(props){
-            if (loading===true){
-              return <Loading/>
+            if (authedLoading===true){
+              return <Loading visible={authedLoading} />
             }else if (authed===true){
               return <Component {...props} {...rest} authed={authed} />
             }else{
@@ -64,7 +64,7 @@ class Instagram extends Component {
                   posts={this.props.postReducer.posts}
                   onCreatePost={this.props.onCreatePost}
                   onAuthLogoutRequesting={this.props.onAuthLogoutRequesting}
-                  loading={this.props.authReducer.authedLoading}
+                  authedLoading={this.props.authReducer.authedLoading}
                   />
                 <PublicRoute
                   path='/login'
@@ -79,8 +79,8 @@ class Instagram extends Component {
                   component={Register}
                   onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
                   />
-                <Message visible={this.props.postReducer.warningVisibility} message="Error"/>
                 <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
+                <Loading visible={this.props.authReducer.authedLoading}/>
             </div>
           </Container>
 

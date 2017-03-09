@@ -1,3 +1,8 @@
 .Login {
-  width: 50%
+  width: 30%;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }

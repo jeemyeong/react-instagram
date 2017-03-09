@@ -10,7 +10,7 @@ class PostList extends Component {
       const userInfo = this.props.userInfo;
       const postsArray = Object.keys(this.props.posts).map(k => this.props.posts[k])
         return(
-          <div className="Post-list">
+          <div className={`animated fadeIn Post-list`} >
             {userInfo.name!==undefined?userInfo.name:userInfo.email}님 환영합니다.
             <button
                 style={{border: 'none', background: 'transparent'}}

@@ -17,6 +17,11 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
       }
+    case types.AUTH_LOGIN_REQUESTED:
+      return {
+        ...state,
+        authedLoading: true,
+      }
     case types.AUTH_LOGIN_GET_USER_INFO:
       return {
         ...state,

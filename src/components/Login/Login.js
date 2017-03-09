@@ -9,7 +9,8 @@ class Login extends Component {
       super(props);
       this.state = {
         email: '',
-        password: ''
+        password: '',
+        closing: false
       };
 
   }
@@ -17,17 +18,17 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.onAuthLoginWithEmail(this.state.email, this.state.password)
-    this.setState({email: '', password: ''})
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
+    this.setState({
+      email: '',
+      password: '',
+      closing: true
+    })
   }
 
     render() {
+        const { closing } = this.state;
         return(
-          <div className='Login'>
-
+          <div className={`animated ${closing?'fadeOut':'fadeIn'} fadeIn Login`} >
             <Form onSubmit={this.handleSubmit}>
 
                 <Header as='h2' icon>
