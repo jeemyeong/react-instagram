@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react'
 
 
 class Write extends Component {
@@ -11,28 +12,26 @@ class Write extends Component {
 
     }
 
+    handleSubmit = (e) => {
+      e.preventDefault()
+      this.props.onCreatePost(this.state.contents, this.props.userInfo)
+      this.setState({contents: ''})
+    }
+
     render() {
         return(
-            <div>
-              <input
-                type="text"
-                value={this.state.contents}
-                onChange={e => this.setState({ contents: e.target.value })}
-              />
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={
-                  () => {
-                      this.props.onCreatePost(this.state.contents, this.props.userInfo)
-                      this.setState({contents: ''})
-                    }
-                }
-              >
-                Add Posts
-              </button>
-
-            </div>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group inline>
+                <Form.Field>
+                  <input
+                    placeholder='Post Content'
+                    value={this.state.contents}
+                    onChange={e => this.setState({ contents: e.target.value })}
+                     />
+                </Form.Field>
+                <Button type='submit'>Submit</Button>
+              </Form.Group>
+            </Form>
         );
     }
 }

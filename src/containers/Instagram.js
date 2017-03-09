@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PostList, Message, Login, Register, Loading } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
 import { authLoginRequestingWithEmail, authLoginRequestingWithFacebook, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
-import { Route, Link, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
 
@@ -53,25 +53,9 @@ class Instagram extends Component {
       this.removeListener()
     }
     render() {
-      const userInfo = this.props.authReducer.userInfo;
       return(
           <Container>
             <div>
-              {this.props.authReducer.authed
-                ? <div>
-                    {userInfo.name!==undefined?userInfo.name:userInfo.email}님 환영합니다.
-                    <button
-                        style={{border: 'none', background: 'transparent'}}
-                        onClick={() => {
-                          this.props.onAuthLogoutRequesting()
-                        }}
-                        className="navbar-brand">[로그아웃]</button>
-                  </div>
-                : <span>
-                    <Link to='/login'>Login</Link><br/>
-                    <Link to='/register'>Register</Link><br/>
-                  </span>}
-
                 <PrivateRoute
                   path='/'
                   component={PostList}
@@ -79,6 +63,7 @@ class Instagram extends Component {
                   userInfo={this.props.authReducer.userInfo}
                   posts={this.props.postReducer.posts}
                   onCreatePost={this.props.onCreatePost}
+                  onAuthLogoutRequesting={this.props.onAuthLogoutRequesting}
                   loading={this.props.authReducer.authedLoading}
                   />
                 <PublicRoute

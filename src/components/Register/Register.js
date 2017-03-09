@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './Register.css'
 
 
@@ -12,6 +13,7 @@ class Register extends Component {
     render() {
         return(
           <div className="col-sm-6 col-sm-offset-3">
+            <Link to='/login'>Login</Link><br/>
             <h1> Register </h1>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
