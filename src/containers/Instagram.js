@@ -40,10 +40,10 @@ function PublicRoute ({component: Component, authed, path, ...rest}) {
 
 class Instagram extends Component {
     componentDidMount () {
-      this.props.onGetPosts();
       this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
         if (user) {
           this.props.onAuthLoginDetected(user)
+          this.props.onGetPosts();
         } else {
           this.props.onAuthLogoutDetected()
         }

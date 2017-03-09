@@ -8,7 +8,7 @@ function* requestPost(action){
   try{
     yield put(actions.getPostRequested());
     let posts = null;
-    yield database.ref('posts').limitToLast(20).once('value', snap => {
+    yield database.ref('posts').limitToLast(15).once('value', snap => {
         posts = snap.val();
       })
     yield put(actions.getPostFulfilled(posts));
@@ -19,6 +19,7 @@ function* requestPost(action){
 }
 
 function* watchRequestPost(){
+  yield takeEvery(types.GET_POST_REQUESTING, updatedItemSaga);
   yield takeEvery(types.GET_POST_REQUESTING, requestPost);
 }
 
@@ -81,5 +82,4 @@ export default function* postSaga(){
   yield fork(watchRequestPost);
   yield fork(watchGetPostRejected);
   yield fork(watchCreatePost);
-  yield fork(updatedItemSaga);
 }

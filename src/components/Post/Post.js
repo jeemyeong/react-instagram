@@ -6,7 +6,7 @@ const Post = (props) => {
   return (
     <Card className={`animated fadeIn`}>
       <Card.Content
-        header={userInfo.name!==undefined?userInfo.name:userInfo.email}
+        header={userInfo===undefined?'':userInfo.name!==undefined?userInfo.name:userInfo.email}
         description={props.contents}
       />
     </Card>
