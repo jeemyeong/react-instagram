@@ -9,7 +9,7 @@ import firebase from 'firebase';
 
 const config = {
   apiKey: ‘apiKey’,
-  authDomain: ‘address.firebaseio.com',
+  authDomain: ‘address.firebaseapp.com',
   databaseURL: 'https://address.firebaseio.com/'
 };
 
