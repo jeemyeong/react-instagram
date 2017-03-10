@@ -12,6 +12,7 @@ class PostList extends Component {
         return(
           <div className={`animated fadeIn Post-list`} >
             <Divider/>
+
             <Label content={`${userInfo.name!==undefined?userInfo.name:userInfo.email}님 환영합니다!`} color='teal' />
 
             <button
@@ -25,6 +26,9 @@ class PostList extends Component {
                 </Label>
             </button>
             <h2>Posts</h2>
+            <Write onCreatePost={this.props.onCreatePost}
+              userInfo={this.props.userInfo}
+              />
             {this.props.authed}
             {postsArray && postsArray !== null ? (
               <Card.Group>
@@ -37,8 +41,6 @@ class PostList extends Component {
               </Card.Group>
             ) : null}
             <Divider />
-            <Write onCreatePost={this.props.onCreatePost}
-                   userInfo={this.props.userInfo}/>
           </div>
         );
     }

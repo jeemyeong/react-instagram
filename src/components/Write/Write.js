@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, Label } from 'semantic-ui-react'
+import { Button, Form, Label, Input } from 'semantic-ui-react'
+import "./Write.css";
 
 
 class Write extends Component {
@@ -20,19 +21,24 @@ class Write extends Component {
 
     render() {
         return(
+          <div className="write-wrapper">
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
-                <Form.Field>
-                  <input
+                <Form.Field className='input-box'>
+                  <Input
                     placeholder='Post Content'
                     value={this.state.contents}
                     onChange={e => this.setState({ contents: e.target.value })}
                      />
-                   <Label pointing>Post Content</Label>
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Button
+                  type='submit'
+                  className='submit-button'>
+                  Submit
+                </Button>
               </Form.Group>
             </Form>
+          </div>
         );
     }
 }
